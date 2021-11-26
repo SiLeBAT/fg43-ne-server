@@ -14,10 +14,10 @@ import { injectable, interfaces } from 'inversify';
 interface ServerLogger {
 }
 
- interface Server {
+interface Server {
     startServer(): void;
 }
- interface ServerConfiguration {
+interface ServerConfiguration {
     api: {
         root: string;
         version: string;
@@ -35,7 +35,7 @@ interface ServerLogger {
     container: interfaces.Container,
     publicDir?: string,
 }
- interface ServerFactory {
+interface ServerFactory {
     (configuration: ServerConfiguration): Server
 }
 
@@ -60,7 +60,7 @@ class DefaultServer implements Server {
             logging,
             container,
             tokenValidation,
-            publicDir = 'public',
+            publicDir = path.join(__dirname, '/public'),
 
         }: ServerConfiguration) {
 
@@ -114,7 +114,7 @@ class DefaultServer implements Server {
                 morgan(this.mapLevelToMorganFormat(logging.logLevel))
             );
 
-            app.use(express.static(path.join(__dirname, publicDir)));
+            app.use(express.static(publicDir));
 
             app.use(
                 api.root + api.docPath + api.version,
@@ -162,7 +162,7 @@ class DefaultServer implements Server {
 
             app.get('*', (req: express.Request, res: express.Response) => {
                 res.sendFile(
-                    path.join(__dirname, publicDir + '/index.html')
+                    path.join(publicDir + '/index.html')
                 );
             });
         });
