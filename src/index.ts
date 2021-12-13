@@ -152,7 +152,7 @@ class DefaultServer implements Server {
                         );
                         res.status(401)
                             .send({
-                                code: -1,
+                                code: 2,
                                 message: err.message
                             })
                             .end();
