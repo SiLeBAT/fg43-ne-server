@@ -1,6 +1,6 @@
 {
   "name": "@SiLeBAT/fg43-ne-server",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The Generic Express Server",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -25,7 +25,7 @@
   "dependencies": {
     "inversify": "~5.1.1",
     "inversify-express-utils": "~6.3.2",
-    "swagger-ui-express": "~4.1.6",
+    "swagger-ui-express": "~4.3.0",
     "helmet": "~4.6.0",
     "winston": "~3.3.3",
     "morgan": "~1.10.0",
