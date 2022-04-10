@@ -21,6 +21,7 @@ interface ServerConfiguration {
     };
     container: interfaces.Container;
     publicDir?: string;
+    contentSecurityPolicyDirectives?: Record<string, null | Iterable<string>>;
 }
 interface ServerFactory {
     (configuration: ServerConfiguration): Server;
