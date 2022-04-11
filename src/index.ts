@@ -31,9 +31,10 @@ interface ServerConfiguration {
     logging: {
         logger: ServerLogger,
         logLevel: string;
-    }
+    },
     container: interfaces.Container,
     publicDir?: string,
+    contentSecurityPolicyDirectives?: Record<string, null | Iterable<string>>
 }
 interface ServerFactory {
     (configuration: ServerConfiguration): Server
@@ -61,6 +62,7 @@ class DefaultServer implements Server {
             container,
             tokenValidation,
             publicDir = path.join(__dirname, '/public'),
+            contentSecurityPolicyDirectives = {}
 
         }: ServerConfiguration) {
 
@@ -89,7 +91,8 @@ class DefaultServer implements Server {
                                 "'unsafe-eval'",
                                 "'unsafe-inline'"
                             ],
-                            'script-src-attr': null // not supported by firefox
+                            'script-src-attr': null, // not supported by firefox
+                            ...contentSecurityPolicyDirectives
                         }
                     }
                 })
