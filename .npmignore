@@ -1,0 +1,19 @@
+# dependencies
+node_modules
+
+# build input
+src
+tsconfig.json
+tslint.json
+
+# git & github
+hooks
+.github
+.gitignore
+
+# installation
+package-lock.json
+.husky
+
+# npm
+.npmignore
