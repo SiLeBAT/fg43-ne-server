@@ -1,13 +1,13 @@
 # dependencies
-node_modules
+/node_modules
 
 # build input
-src
+/src
 tsconfig.json
 tslint.json
 
 # git & github
-hooks
+/hooks
 .github
 .gitignore
 
