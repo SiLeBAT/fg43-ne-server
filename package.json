@@ -1,6 +1,6 @@
 {
   "name": "@SiLeBAT/fg43-ne-server",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "The Generic Express Server",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "inversify": "~5.1.1",
-    "inversify-express-utils": "~6.3.2",
+    "inversify-express-utils": "~6.4.3",
     "swagger-ui-express": "~4.5.0",
     "helmet": "~5.1.1",
     "winston": "~3.8.2",
@@ -49,24 +49,6 @@
     "typescript": "3.9.10",
     "copyfiles": "~2.4.1",
     "husky": "~7.0.4"
-  },
-  "overrides": {
-    "inversify-express-utils": {
-      "express": "4.17.3",
-      "debug": "4.3.4"
-    },
-    "express": {
-      "debug": "4.3.4"
-    },
-    "body-parser": {
-      "debug": "4.3.4"
-    },
-    "morgan": {
-      "debug": "4.3.4"
-    },
-    "compression": {
-      "debug": "4.3.4"
-    }
   },
   "author": "dptolle",
   "license": "MIT",
