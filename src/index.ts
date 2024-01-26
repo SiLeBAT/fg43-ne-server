@@ -9,7 +9,7 @@ import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 
 // local
-import { injectable, interfaces } from 'inversify';
+import { injectable } from 'inversify';
 
 interface ServerLogger {
 }
@@ -32,7 +32,7 @@ interface ServerConfiguration {
         logger: ServerLogger,
         logLevel: string;
     },
-    container: interfaces.Container,
+    container: any,
     publicDir?: string,
     contentSecurityPolicyDirectives?: Record<string, null | Iterable<string>>,
     customApp?: Application

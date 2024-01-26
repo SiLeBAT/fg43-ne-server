@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "skipLibCheck": true,
         "baseUrl": ".",
         "target": "ES2019",
         "module": "CommonJS",
