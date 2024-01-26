@@ -1,12 +1,12 @@
 
-import path from 'path';
-import express from 'express';
-import helmet from 'helmet';
 import compression from 'compression';
 import cors from 'cors';
-import morgan from 'morgan';
-import swaggerUi from 'swagger-ui-express';
+import express, { Application } from 'express';
+import helmet from 'helmet';
 import { InversifyExpressServer } from 'inversify-express-utils';
+import morgan from 'morgan';
+import path from 'path';
+import swaggerUi from 'swagger-ui-express';
 
 // local
 import { injectable, interfaces } from 'inversify';
@@ -34,7 +34,8 @@ interface ServerConfiguration {
     },
     container: interfaces.Container,
     publicDir?: string,
-    contentSecurityPolicyDirectives?: Record<string, null | Iterable<string>>
+    contentSecurityPolicyDirectives?: Record<string, null | Iterable<string>>,
+    customApp?: Application
 }
 interface ServerFactory {
     (configuration: ServerConfiguration): Server
@@ -62,14 +63,15 @@ class DefaultServer implements Server {
             container,
             tokenValidation,
             publicDir = path.join(__dirname, '/public'),
-            contentSecurityPolicyDirectives = {}
+            contentSecurityPolicyDirectives = {},
+            customApp
 
         }: ServerConfiguration) {
 
 
         this.server = new InversifyExpressServer(container, null, {
             rootPath: api.root
-        });
+        }, customApp);
 
         this.server.setConfig(app => {
             app.set('port', api.port);
@@ -197,4 +199,5 @@ const createServer: ServerFactory = function (configuration: ServerConfiguration
     return new DefaultServer(configuration);
 }
 
-export { createServer, ServerConfiguration, Server, ServerFactory }
+export { Server, ServerConfiguration, ServerFactory, createServer };
+
