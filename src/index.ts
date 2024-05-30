@@ -79,6 +79,10 @@ class DefaultServer implements Server {
 
             app.disable('x-powered-by');
 
+            const scriptSources = ["'self'", "'unsafe-inline'", "'unsafe-eval'"];
+            const styleSources = ["'self'", "'unsafe-inline'"];
+            const connectSources = ["https://mibi-portal.bfr.bund.de/", "'self'"];
+
             // Common security headers
             app.use(
                 helmet({
@@ -88,13 +92,13 @@ class DefaultServer implements Server {
                     contentSecurityPolicy: {
                         useDefaults: true,
                         directives: {
-                            'script-src': [
-                                "'self'",
-                                "'unsafe-eval'",
-                                "'unsafe-inline'"
-                            ],
+                            ...contentSecurityPolicyDirectives,
+                            defaultSrc: ["'self'"],
+                            scriptSrc: scriptSources,
+                            scriptSrcElem: scriptSources,
+                            styleSrc: styleSources,
+                            connectSrc: connectSources,
                             'script-src-attr': null, // not supported by firefox
-                            ...contentSecurityPolicyDirectives
                         }
                     }
                 })
