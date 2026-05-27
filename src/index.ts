@@ -23,22 +23,23 @@ interface ServerConfiguration {
         version: string;
         port: number;
         docPath: string;
-    }
+    };
     tokenValidation?: {
         validator: Function,
         jwtSecret: string;
-    },
+    };
     logging: {
         logger: ServerLogger,
         logLevel: string;
-    },
-    container: any,
-    publicDir?: string,
-    contentSecurityPolicyDirectives?: Record<string, null | Iterable<string>>,
-    customApp?: Application
+    };
+    // tslint:disable-next-line:no-any
+    container: any;
+    publicDir?: string;
+    contentSecurityPolicyDirectives?: Record<string, null | Iterable<string>>;
+    customApp?: Application;
 }
 interface ServerFactory {
-    (configuration: ServerConfiguration): Server
+    (configuration: ServerConfiguration): Server;
 }
 
 @injectable()
@@ -201,7 +202,7 @@ class DefaultServer implements Server {
 
 const createServer: ServerFactory = function (configuration: ServerConfiguration): Server {
     return new DefaultServer(configuration);
-}
+};
 
 export { Server, ServerConfiguration, ServerFactory, createServer };
 
