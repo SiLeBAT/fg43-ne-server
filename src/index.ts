@@ -166,6 +166,18 @@ class DefaultServer implements Server {
                                 message: err.message
                             })
                             .end();
+                    } else if (err.status) {
+                        next(err);
+                    } else {
+                        app.get('logger').error(
+                            `Unhandled server error. error=${String(err)}`
+                        );
+                        res.status(500)
+                            .send({
+                                code: 1,
+                                message: 'Internal Server Error'
+                            })
+                            .end();
                     }
                 }
             );
